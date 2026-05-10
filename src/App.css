@@ -8,16 +8,15 @@ html, body, #root {
   font-family: 'Segoe UI', Arial, sans-serif;
   overflow-x: hidden;
 }
-
 .App {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: stretch; /* stretch to parent width */
+  align-items: stretch;
   background: none;
 }
 
-/* Banner centered: no margin, takes full width, uses flex for layout */
+/* --- UNIFIED, SEAMLESS TOP BANNER --- */
 .top-banner {
   display: flex;
   flex-direction: row;
@@ -27,59 +26,60 @@ html, body, #root {
   min-width: 320px;
   box-sizing: border-box;
   gap: 0;
-  padding: 32px 0;
-  background: none;
+  padding: 32px 0 0 0; /* remove padding-bottom to bring it flush to navbar! */
+  background: #222a38;
+  border-radius: 18px 18px 0 0;
+  box-shadow: 0 8px 32px #00394722;
+  position: relative;
+  overflow: hidden;
 }
 
-/* Flex children: 1:2:1 ratio */
+/* --- Logos --- */
 .banner-logo {
   height: 190px;
   object-fit: contain;
-  background: rgba(255,255,255,0.08);
-  border-radius: 16px;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
   filter: drop-shadow(0 8px 18px #42649c) saturate(1.2) brightness(1.08);
-  box-shadow: 0 8px 32px #8d98b333, 0px 2px 5px #0002;
-  transition: transform 0.2s;
   flex: 1 1 0;
   display: flex;
   align-items: center;
   justify-content: center;
   min-width: 0;
   max-width: 100%;
+  margin: 0;
 }
 .logo-left {
   transform: perspective(800px) rotateY(-11deg) scale(0.8);
-filter: invert(0) drop-shadow(0 28px 18px #42649c) saturate(2.2) brightness(1.08);
+  filter: invert(0) drop-shadow(0 28px 18px #42649c) saturate(2.2) brightness(1.08);
 }
 .logo-right {
   transform: perspective(800px) rotateY(14deg) scale(0.8);
-  filter: invert(4) drop-shadow(0 28px 18px #42649c) saturate(4.2) brightness(4.08);
+  filter: invert(1) drop-shadow(0 28px 18px #42649c) saturate(2.2) brightness(1.08);
 }
 
+/* --- Carousel --- */
 .banner-carousel-box {
   flex: 2 1 0;
   position: relative;
   width: 100%;
   min-width: 320px;
-  /* Remove max-width: was causing indents. */
   height: 190px;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border-radius: 18px;
-  box-shadow: 0 8px 32px #00394722;
-  background: #222a38;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
 }
-
 .banner-carousel-img {
   width: 100%;
   height: 190px;
   object-fit: cover;
   filter: blur(6px) brightness(0.7) contrast(1.08);
 }
-
-/* Overlay: center text over carousel */
 .banner-overlay-text {
   position: absolute;
   left: 0; right: 0; top: 0; bottom: 0;
@@ -91,18 +91,16 @@ filter: invert(0) drop-shadow(0 28px 18px #42649c) saturate(2.2) brightness(1.08
   z-index: 2;
   text-shadow: 0px 6px 18px #000, 0px 1px 2px #2229;
 }
-
 .banner-overlay-text h1 {
   font-size: 2.7rem;
   margin: 0 0 25px 0;
   letter-spacing: 2.5px;
   font-family: inherit;
   font-weight: 700;
-color: #fff;
+  color: #fff;
   z-index: 2;
   text-shadow: 10px 6px 8px #000, 0px 1px 2px #2229;
 }
-
 .banner-overlay-text h2 {
   font-size: 2.2rem;
   margin: 0;
@@ -110,52 +108,33 @@ color: #fff;
   letter-spacing: 2px;
   opacity: 0.88;
   font-family: inherit;
-color: #fff;
+  color: #fff;
   text-shadow: 10px 6px 28px #100, 0px 2px 2px #2229;
 }
 
-/* Mobile: stack vertically */
-@media (max-width: 900px) {
-  .top-banner {
-    flex-direction: column;
-    gap: 18px;
-    padding-top: 16px;
-    padding-bottom: 16px;
-  }
-  .banner-carousel-box, .banner-carousel-img {
-    width: 90vw;
-    min-width: 220px;
-    height: 120px;
-  }
-  .banner-logo {
-    height: 90px;
-    min-width: 0;
-    max-width: 180px;
-  }
-}
+/* Navbar (unchanged) */
 .main-navbar {
   width: 100vw;
-  background: #143055; /* navy blue */
+  background: #143055;
   min-height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 18px;
   padding: 0;
-  margin: 0;
+  margin: 0;             /* Ensure no margin below the bar! */
   border-bottom: 2px solid #314e72;
   box-shadow: 0px 2px 8px #0003;
   font-family: inherit;
   z-index: 10;
   position: relative;
 }
-
 .nav-tab {
   color: #fff;
   background: none;
   padding: 7px 18px;
   margin: 0 2px;
-  border-radius: 22px 22px 0 0;
+  border-radius: 10px 22px 0 0;
   text-decoration: none;
   font-size: 1.08rem;
   font-weight: 500;
@@ -166,17 +145,244 @@ color: #fff;
   position: relative;
   top: 2px;
 }
-
 .nav-tab:not(.active):hover {
   background: #32548a;
   color: #cfe2fc;
   cursor: pointer;
 }
-
 .nav-tab.active {
   background: #1c4173;
   color: #fff;
   font-weight: 600;
   border-bottom: 2.5px solid #fff;
   box-shadow: 0px 2px 8px #0001;
+}
+
+/* --- Main content with gif background --- */
+.main-content-with-gif {
+  position: relative;
+  width: 100vw;
+  min-height: 1500px;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  overflow: hidden;
+  padding-top: 0;
+  margin-top: 0;
+  /* Remove any accidental top gap! */
+}
+
+/* The GIF itself, absolutely positioned, faded */
+.main-content-with-gif::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: url('/wave.gif') center center / cover no-repeat;
+  opacity: 0.18;
+  pointer-events: none;
+  animation: slow-gif-play 8s linear infinite;
+}
+@keyframes slow-gif-play {
+  from { background-position: 0 0; }
+  to   { background-position: 100% 0; }
+}
+.your-home-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+/* --- Research fields: 3 sections, flush with navbar --- */
+.research-fields {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  width: 100vw;
+  max-width: 100vw;
+ min-height: 500px;
+  background: none;
+  position: relative;
+  margin: 0; /* CRUCIAL: no margin! */
+  z-index: 2;
+}
+
+.research-section {
+  flex: 1 1 0;
+  padding: 24px 18px;
+  background: rgba(34, 42, 56, 0.82);
+  transition: box-shadow 0.22s, border-color 0.22s, background 0.18s;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 340px;
+  overflow: visible;
+  /* Fine separator line on right (except for last) */
+  border-right: 1.5px solid #23304b55;
+  box-shadow: 0 1px 16px #0039470e;
+}
+.research-section:last-child {
+  border-right: none;
+}
+.research-section:hover {
+  background: #23304be6;
+  box-shadow: 0px 4px 24px #444a8055, 0 2px 12px #00394735;
+  z-index: 3;
+  border-color: #326cf1a7;
+}
+.research-title-box {
+  width: 100%;
+  background: #192234e0;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px #20326621;
+  padding: 16px 10px 10px 10px;
+  margin-bottom: 20px;
+  text-align: center;
+  transition: box-shadow 0.2s;
+}
+.research-title-box h3 {
+  margin: 0 0 6px 0;
+  font-size: 1.3rem;
+  color: #e8ebff;
+  letter-spacing: 1.1px;
+}
+.research-title-box p {
+  margin: 0;
+  font-size: 1.02rem;
+  color: #e0eaffcc;
+}
+.research-carousel-box {
+  width: 100%;
+  padding: 0;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  background: #222a38d8;
+  box-shadow: 0 1px 9px #111b2011;
+  min-height: 275px;
+}
+.research-carousel-img {
+  max-width: 92%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 10px;
+  filter: brightness(0.86) contrast(1.1) drop-shadow(0 4px 8px #0b1e4233);
+}
+
+/* Responsive stack for mobile & remove fine lines */
+@media (max-width: 900px) {
+  .top-banner {
+    flex-direction: column;
+    gap: 18px;
+    padding-top: 16px;
+    padding-bottom: 0;
+    border-radius: 12px 12px 0 0;
+  }
+  .banner-carousel-box,
+  .banner-carousel-img {
+    width: 90vw;
+    min-width: 220px;
+    height: 120px;
+  }
+  .banner-logo {
+    height: 90px;
+    min-width: 0;
+    max-width: 180px;
+  }
+  .banner-overlay-text h1 {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+  }
+  .banner-overlay-text h2 {
+    font-size: 1.1rem;
+  }
+  .research-fields {
+    flex-direction: column;
+    align-items: stretch;
+    width: 98vw;
+  }
+  .research-section {
+    border-right: none !important;
+    border-bottom: 1.5px solid #23304b55;
+    margin-bottom: 18px;
+  }
+  .research-section:last-child {
+    border-bottom: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .top-banner {
+    gap: 10px;
+    padding: 8px 0 0 0;
+    border-radius: 8px 8px 0 0;
+  }
+  .banner-logo {
+    height: 50px;
+    max-width: 60vw;
+  }
+  .banner-carousel-box,
+  .banner-carousel-img {
+    width: 95vw;
+    min-width: 80px;
+    height: 54px;
+    max-width: 96vw;
+  }
+  .banner-overlay-text h1 {
+    font-size: 1rem;
+    margin-bottom: 4px;
+  }
+  .banner-overlay-text h2 {
+    font-size: 0.65rem;
+  }
+  .research-section {
+    padding: 14px 4vw;
+    min-width: 120px;
+  }
+  .research-title-box {
+    padding: 8px 2vw 7px 2vw;
+    border-radius: 9px;
+  }
+  .research-title-box h3 {
+    font-size: 1.02rem;
+  }
+  .research-title-box p {
+    font-size: 0.9rem;
+  }
+  .research-carousel-box {
+    min-height: 90px;
+    border-radius: 7px;
+  }
+  .research-carousel-img {
+    height: 60px;
+    border-radius: 6px;
+  }
+}
+@media (max-width: 375px) {
+  .banner-logo {
+    height: 30px;
+    max-width: 38vw;
+  }
+  .banner-carousel-box,
+  .banner-carousel-img {
+    width: 97vw;
+    height: 35px;
+    min-width: 40px;
+    max-width: 98vw;
+  }
+  .banner-overlay-text h1 {
+    font-size: 0.75rem;
+    margin-bottom: 2px;
+  }
+  .banner-overlay-text h2 {
+    font-size: 0.45rem;
+  }
 }
